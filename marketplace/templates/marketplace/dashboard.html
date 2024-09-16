@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Dashboard</h1>
+<p>Welcome to your dashboard, {{ user.username }}!</p>
+<p>Here are some quick links:</p>
+<ul>
+    <li><a href="{% url 'product_list' %}">View Products</a></li>
+    <li><a href="{% url 'logout' %}">Logout</a></li>
+</ul>
+{% endblock %}

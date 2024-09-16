@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block content %}
+   <h1>{{ product.name }}</h1>
+   {% if product.image %}
+   <img src="{{ product.image.url }}" alt="{{ product.name }}" style="width:300px;height:300px;">
+{% else %}
+   <img src="/path/to/placeholder/image.jpg" alt="No image available" style="width:300px;height:300px;">
+{% endif %}
+   <p>{{ product.description }}</p>
+   <p>Price: R{{ product.price }}</p>
+
+   <!-- Form to Add to Cart -->
+   <form action="{% url 'add_to_cart' product.id %}" method="post">
+       {% csrf_token %}
+       <label for="quantity">Quantity:</label>
+       <select name="quantity" id="quantity">
+           {% for i in quantity_range %}
+               <option value="{{ i }}" {% if cart_item and cart_item.quantity == i %}selected{% endif %}>{{ i }}</option>
+           {% endfor %}
+       </select>
+       <button type="submit">Add to Cart</button>
+   </form>
+
+   <!-- Remove from Cart Button -->
+   <!-- {% if cart_item %}
+       <form action="{% url 'remove_from_cart' product.id %}" method="post">
+           {% csrf_token %}
+           <button type="submit">Remove from Cart</button>
+       </form>
+   {% endif %} -->
+
+   <!-- Display a message for successful add/remove -->
+   {% if messages %}
+       {% for message in messages %}
+           <p>{{ message }}</p>
+       {% endfor %}
+   {% endif %}
+   <a href="{% url 'cart_contents' %}"><button>View Cart</button></a>
+   <a href="{% url 'product_list' %}"><button>Continue Shopping</button></a>
+
+   <h3>Recommended Products</h3>
+<ul>
+    {% for recommended_product in recommended_products %}
+        <li>
+            <a href="{% url 'product_detail' recommended_product.pk %}">{{ recommended_product.name }}</a> 
+            <a href="{% url 'product_detail' recommended_product.pk %}">
+                {% if recommended_product.image %}
+                    <img src="{{ recommended_product.image.url }}" alt="{{ recommended_product.name }}" style="width:100px;height:100px;">
+                {% else %}
+                    <img src="/path/to/placeholder/image.jpg" alt="No image available" style="width:100px;height:100px;">
+                {% endif %}
+            ({{ recommended_product.price }} ZAR)
+        </li>
+    {% empty %}
+        <li>No recommendations available.</li>
+    {% endfor %}
+</ul>
+{% endblock %}

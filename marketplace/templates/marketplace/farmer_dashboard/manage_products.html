@@ -1,0 +1,25 @@
+<!-- manage_products.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Manage Your Products</h1>
+<a href="{% url 'add_product' %}">Add New Product</a>
+{% for product in products %}
+    <div class="product">
+        <h3>{{ product.name }}</h3>
+        <p>Price: {{ product.price }}</p>
+        <p>Description: {{ product.description }}</p>
+        
+        <!-- Display the product image -->
+        {% if product.image %}
+            <img src="{{ product.image.url }}" alt="{{ product.name }}" style="width:150px;height:auto;">
+        {% else %}
+            <p>No image available.</p>
+        {% endif %}
+        
+        <a href="{% url 'edit_product' product.id %}">Edit</a>
+        <a href="{% url 'delete_product' product.id %}">Delete</a>
+    </div>
+{% endfor %}
+
+{% endblock %}

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cart</title>
+</head>
+<body>
+  
+  <h1>Cart Contents</h1>
+
+  {% if cart_items %}
+      <ul>
+          {% for item in cart_items %}
+              <li>
+                {% if item.product.image %}
+                <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}" style="width:50px;height:50px;">
+            {% else %}
+                <img src="/path/to/placeholder/image.jpg" alt="No image available" style="width:50px;height:50px;">
+            {% endif %}
+                  {{ item.product.name }} x {{ item.quantity }} - 
+                  R{{ item.product.price|floatformat:2 }} each
+
+                  <form action="{% url 'remove_from_cart' item.product.id %}" method="post" style="display:inline;">
+                    {% csrf_token %}
+                    <button type="submit">Remove from Cart</button>
+                </form>
+
+              </li>
+          {% endfor %}
+      </ul>
+
+      <h2>Total: R{{ total_amount|floatformat:2 }}</h2>
+      <a href="{% url 'product_list' %}"><button>Continue Shopping</button></a>
+
+
+      <form action="{% url 'place_order' %}" method="post">
+          {% csrf_token %}
+          <button type="submit">Place Order</button>
+      </form>
+
+  {% else %}
+      <p>Your cart is empty.</p>
+      <p>Would you like to continue shopping?</p>
+      <a href="{% url 'product_list' %}"><button>Continue Shopping</button></a>
+  {% endif %}
+  
+  
+</body>
+</html>

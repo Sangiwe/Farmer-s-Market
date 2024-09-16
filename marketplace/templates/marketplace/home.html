@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Welcome to the Marketplace</h1>
+<p>Explore fresh products straight from the farm to your table!</p>
+<p><a href="{% url 'product_list' %}">View Products</a></p>
+
+{% if user.is_authenticated %}
+<p>Hello, {{ user.username }}!</p>
+<a href="{% url 'dashboard' %}">Go to Dashboard</a>
+{% else %}
+<a href="{% url 'login' %}">Login</a> or
+<a href="{% url 'register' %}">Register</a>
+{% endif %}
+{% endblock %}
+
+
+
+
+<!-- marketplace/templates/marketplace/home.html
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Home</title>
+</head>
+<body>
+    <h1>Welcome to the Marketplace</h1>
+    <p><a href="{% url 'product_list' %}">View Products</a></p>
+
+    {% if user.is_authenticated %}
+    <p>Hello, {{ user.username }}!</p>
+    <a href="{% url 'logout' %}">Logout</a>
+    {% else %}
+    <a href="{% url 'login' %}">Login</a> or
+    <a href="{% url 'register' %}">Register</a> <!-- Link to registration
+    {% endif %}
+</body>
+</html> -->

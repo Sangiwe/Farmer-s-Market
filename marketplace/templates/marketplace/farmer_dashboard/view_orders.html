@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Your Orders</h1>
+<ul>
+    {% for order in orders %}
+        <li>
+            Customer: {{ order.customer.username }}<br>
+            Order ID: {{ order.id }}<br>
+            Total Amount: {{ order.total_amount }}<br>
+            Quantity: {% for item in order.orderitem_set.all %}{{ item.quantity }}{% endfor %}<br>
+            Status: {{ order.status }}<br>
+            <!-- Option to update status if needed -->
+            
+            <!-- Form to mark order as completed -->
+            <form action="{% url 'mark_order_completed' order.id %}" method="POST">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-success">Mark as Completed</button>
+            </form>
+        </li>
+    {% endfor %}
+</ul>
+{% endblock %}
+
+
+
+
+
