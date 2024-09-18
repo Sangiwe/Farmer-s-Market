@@ -116,9 +116,11 @@ def thank_you(request):
 def dashboard_view(request):
     return render(request, 'marketplace/dashboard.html')
 
+@login_required
 def place_order(request):
-    # Get cart items for the logged-in user
-    cart_items = CartItem.objects.filter(user=request.user)
+    # Get or create a cart for the logged-in user
+    cart = get_object_or_404(Cart, user=request.user)
+    cart_items = CartItem.objects.filter(cart=cart)
     
     if cart_items:
         # Calculate total amount
@@ -137,6 +139,7 @@ def place_order(request):
         messages.success(request, "Your order has been placed successfully!")
 
     return redirect('order_confirmation')
+
 
 def order_confirmation(request):
     return render(request, 'marketplace/order_confirmation.html')
