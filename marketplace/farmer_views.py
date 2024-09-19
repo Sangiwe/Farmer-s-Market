@@ -4,7 +4,7 @@ from .models import Product, Order, Farmer, OrderItem
 from .forms import ProductForm
 from django.db.models import Sum, Avg
 from django.contrib.auth.forms import UserChangeForm
-from .forms import CustomUserChangeForm
+from accounts.forms import CustomUserChangeForm
 from django.contrib import messages
 
 @login_required

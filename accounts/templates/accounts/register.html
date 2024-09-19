@@ -1,45 +1,44 @@
+<!-- register.html -->
 <!DOCTYPE html>
 <html>
 <head>
     <title>Register</title>
 </head>
 <body>
-    <!-- accounts/templates/accounts/register.html -->
 {% extends 'base.html' %}
 
 {% block content %}
   <h2>Register</h2>
   <form method="post">
     {% csrf_token %}
-    {{ form.non_field_errors }}  <!-- This will display general form errors -->
+    {{ form.non_field_errors }}
 
     <div>
-      {{ form.username.label_tag }}  <!-- Username label -->
-      {{ form.username }}  <!-- Username input field -->
-      {{ form.username.errors }}  <!-- Show errors for the username field if there are any -->
+      {{ form.username.label_tag }}
+      {{ form.username }}
+      {{ form.username.errors }}
     </div>
 
     <div>
-      {{ form.password1.label_tag }}  <!-- Password label -->
-      {{ form.password1 }}  <!-- Password input field -->
-      {{ form.password1.errors }}  <!-- Show errors for password if triggered -->
+      {{ form.password1.label_tag }}
+      {{ form.password1 }}
+      {{ form.password1.errors }}
     </div>
 
     <div>
-      {{ form.password2.label_tag }}  <!-- Password confirmation label -->
-      {{ form.password2 }}  <!-- Password confirmation input field -->
-      {{ form.password2.errors }}  <!-- Show errors for password confirmation if triggered -->
+      {{ form.password2.label_tag }}
+      {{ form.password2 }}
+      {{ form.password2.errors }}
+    </div>
+
+    <div>
+      {{ form.user_type.label_tag }}  <!-- New user type field -->
+      {{ form.user_type }}  <!-- Dropdown for user type (farmer/customer) -->
+      {{ form.user_type.errors }}
     </div>
 
     <button type="submit">Sign Up</button>
   </form>
 {% endblock %}
-
-    <!-- <h2>Register</h2>
-    <form method="POST">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Sign Up</button>
-    </form> -->
 </body>
 </html>

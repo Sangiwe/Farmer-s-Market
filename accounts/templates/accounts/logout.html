@@ -1,3 +1,4 @@
+<!-- logout.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,8 +7,11 @@
     <title>Logout</title>
 </head>
 <body>
+    {% extends 'base.html' %}
+    {% block content %}
     <h1>Logout</h1>
     <p>You have been logged out.</p>
     <p><a href="{% url 'login' %}">Login again</a></p>
+    {% endblock %}
 </body>
 </html>
