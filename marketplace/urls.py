@@ -7,9 +7,10 @@ from django.conf.urls.static import static
 
 
 
+
 urlpatterns = [
   path('', views.home, name='home'),
-  path('dashboard/', views.dashboard_view, name='dashboard'),
+  path('dashboard/', views.dashboard, name='dashboard'),
   path('products/', views.product_list, name='product_list'),
   path('products/<int:pk>/', views.product_detail, name='product_detail'),
   path('products/<int:pk>/add_to_cart/', views.add_to_cart, name='add_to_cart'),
@@ -30,7 +31,10 @@ urlpatterns = [
     path('place_order/', views.place_order, name='place_order'),
     path('order_confirmation/', views.order_confirmation, name='order_confirmation'),
     path('mark_order_completed/<int:order_id>/', views.mark_order_completed, name='mark_order_completed'),
-
+  path('about-us/', views.about_us_view, name='about_us'),
+  path('contact/', views.contact_view, name='contact'),
+  path('privacy-policy/', views.privacy_policy_view, name='privacy_policy')
+  
 ] 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

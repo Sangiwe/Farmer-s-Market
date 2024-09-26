@@ -1,28 +1,39 @@
 <!-- login.html -->
+{% extends 'base.html' %}
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="stylesheet" href="{% static '\css\forms.css' %}">
     <title>Login</title>
 </head>
 <body>
-    {% extends 'base.html' %}
-    {% block content %}
+
+{% block content %}
+<div class="form-container">
     <h1>Login</h1>
     <form method="post">
         {% csrf_token %}
+        
+        <div>
+            <label for="user_type">Login as:</label>
+            <select name="user_type" id="user_type">
+                <option value="customer">Customer</option>
+                <option value="farmer">Farmer</option>
+            </select>
+        </div>
+
         {{ form.as_p }}
         <button type="submit">Login</button>
     </form>
     
     <p><a href="{% url 'password_reset' %}">Forgot your password?</a></p>
     <p>Don't have an account? <a href="{% url 'register' %}">Sign up here</a></p>
+</div>
 
-    <h3>Are you a Farmer or a Customer?</h3>
-    <p><a href="{% url 'farmer_dashboard' %}">Farmer Dashboard</a></p>
-    <p><a href="{% url 'dashboard' %}">Customer Dashboard</a></p>
-
-    {% endblock %}
 </body>
 </html>
+{% endblock %}

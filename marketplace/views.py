@@ -113,7 +113,7 @@ def thank_you(request):
 
 
 @login_required
-def dashboard_view(request):
+def dashboard (request):
     return render(request, 'marketplace/dashboard.html')
 
 @login_required
@@ -152,3 +152,13 @@ def mark_order_completed(request, order_id):
         order.save()
         messages.success(request, 'Order marked as completed.')
     return redirect('view_orders')  # Or any appropriate view
+
+# Placeholder views for About Us, Contact, and Privacy Policy
+def about_us_view(request):
+    return render(request, 'marketplace/about_us.html')
+
+def contact_view(request):
+    return render(request, 'marketplace/contact.html')
+
+def privacy_policy_view(request):
+    return render(request, 'marketplace/privacy_policy.html')

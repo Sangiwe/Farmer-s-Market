@@ -1,0 +1,52 @@
+/* Form container to center the form */
+.form-container {
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 2em;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  width: 100%;
+  text-align: center;
+  margin: 2em auto; /* Center the container */
+}
+
+/* Header styling */
+h1, h2 {
+  color: #6B614B; /* Match the theme */
+  margin-bottom: 1.5em;
+}
+
+/* Input fields styling */
+input[type="text"], input[type="password"], input[type="email"], select {
+  width: 100%;
+  padding: 0.75em;
+  margin-bottom: 1em;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1em;
+}
+
+/* Button styling */
+button {
+  width: 100%;
+  padding: 0.75em;
+  background-color: #8A7F5F;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 1em;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #6B614B;
+}
+
+/* Link styling */
+p a {
+  color: #6B614B; /* Match the theme */
+}
+
+p a:hover {
+  text-decoration: underline;
+}

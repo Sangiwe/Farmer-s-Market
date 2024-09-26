@@ -1,38 +1,44 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Welcome to the Marketplace</h1>
-<p>Explore fresh products straight from the farm to your table!</p>
-<p><a href="{% url 'product_list' %}">View Products</a></p>
+  <section class="hero">
+    <div class="hero-content">
+      <h2>Welcome to Farmer's Market</h2>
+      <p>Support your local farmers and buy fresh, organic products directly from the source!</p>
+      <a href="{% url 'product_list' %}" class="btn">View Products</a>
+      <a href="{% url 'register' %}" class="btn">Get Started</a>
+    </div>
+  </section>
 
-{% if user.is_authenticated %}
-<p>Hello, {{ user.username }}!</p>
-<a href="{% url 'dashboard' %}">Go to Dashboard</a>
-{% else %}
-<a href="{% url 'login' %}">Login</a> or
-<a href="{% url 'register' %}">Register</a>
-{% endif %}
+  <section class="features">
+    <h3>Why Choose Us?</h3>
+    <div class="feature-grid">
+      <div class="feature-item">
+        <h4>Fresh Products</h4>
+        <p>All products are locally sourced from small farmers.</p>
+      </div>
+      <div class="feature-item">
+        <h4>Support Farmers</h4>
+        <p>Your purchase directly supports the livelihood of local farmers.</p>
+      </div>
+      <div class="feature-item">
+        <h4>Organic and Sustainable</h4>
+        <p>We focus on organic and sustainable farming practices.</p>
+      </div>
+    </div>
+  </section>
 {% endblock %}
 
 
 
 
-<!-- marketplace/templates/marketplace/home.html
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Home</title>
-</head>
-<body>
-    <h1>Welcome to the Marketplace</h1>
-    <p><a href="{% url 'product_list' %}">View Products</a></p>
 
-    {% if user.is_authenticated %}
-    <p>Hello, {{ user.username }}!</p>
-    <a href="{% url 'logout' %}">Logout</a>
-    {% else %}
-    <a href="{% url 'login' %}">Login</a> or
-    <a href="{% url 'register' %}">Register</a> <!-- Link to registration
-    {% endif %}
-</body>
-</html> -->
+
+
+
+
+
+
+
+
+

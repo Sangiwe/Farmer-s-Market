@@ -17,19 +17,17 @@ def login_view(request):
             user = form.get_user()
             login(request, user)
 
-            # Ensure the user has a profile (if not, create one)
-            if not hasattr(user, 'profile'):
-                Profile.objects.create(user=user, user_type='customer')  # Assuming default as 'customer'
-            
             # Redirect based on user type (farmer or customer)
-            if user.profile.user_type == 'farmer':
-                return redirect('farmer_dashboard')  # Redirect to farmer dashboard
-            else:
-                return redirect('dashboard')  # Redirect to customer dashboard
+            if hasattr(user, 'profile'):
+                if user.profile.user_type == 'farmer':
+                    return redirect('farmer-dashboard')  # Redirect to farmer dashboard
+                else:
+                    return redirect('dashboard')  # Redirect to customer dashboard
     else:
         form = AuthenticationForm()
 
     return render(request, 'accounts/login.html', {'form': form})
+
 
 
 
@@ -54,15 +52,16 @@ def register_view(request):
                 user = form.save()
                 user_type = form.cleaned_data['user_type']
                 Profile.objects.create(user=user, user_type=user_type)
-                login(request, user)
-                if user_type == 'farmer':
+                login(request, user)  # Automatically log the user in after registration
+                
+                if form.cleaned_data['user_type'] == 'farmer':
                     farmer_group, created = Group.objects.get_or_create(name='Farmer')
                     user.groups.add(farmer_group)
-                    return redirect('farmer_dashboard')
+                    return redirect('farmer_dashboard')  # Redirect to farmer dashboard
                 else:
                     customer_group, created = Group.objects.get_or_create(name='Customer')
                     user.groups.add(customer_group)
-                    return redirect('dashboard')
+                    return redirect('dashboard')  # Redirect to customer dashboard
             except IntegrityError as e:
                 print(f'IntegrityError: {e}')
                 # Optionally, you can add a message for the user here
@@ -72,33 +71,6 @@ def register_view(request):
     else:
         form = CustomUserRegistrationForm()
     return render(request, 'accounts/register.html', {'form': form})
-
-
-# def register_view(request):
-#     if request.method == 'POST':
-#         form = CustomUserRegistrationForm(request.POST)
-#         if form.is_valid():
-#             user = form.save()  # Save the user
-#             user_type = form.cleaned_data['user_type']
-
-#             # Create a Profile instance and assign the user_type
-#             Profile.objects.create(user=user, user_type=user_type)
-
-#             login(request, user)  # Log the user in
-
-#             # Assign the user to a group based on their selection (farmer/customer)
-#             if user_type == 'farmer':
-#                 farmer_group, created = Group.objects.get_or_create(name='Farmer')
-#                 user.groups.add(farmer_group)
-#                 return redirect('farmer_dashboard')  # Redirect farmer to farmer dashboard
-#             else:
-#                 customer_group, created = Group.objects.get_or_create(name='Customer')
-#                 user.groups.add(customer_group)
-#                 return redirect('dashboard')  # Redirect customer to customer dashboard
-#     else:
-#         form = CustomUserRegistrationForm()
-
-#     return render(request, 'accounts/register.html', {'form': form})
 
 
 

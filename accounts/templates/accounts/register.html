@@ -1,44 +1,50 @@
 <!-- register.html -->
+{% extends 'base.html' %}
+{% load static %}
 <!DOCTYPE html>
 <html>
 <head>
     <title>Register</title>
+    
+    <link rel="stylesheet" href="{% static '\css\forms.css' %}">
 </head>
-<body>
-{% extends 'base.html' %}
+<body>  
 
-{% block content %}
-  <h2>Register</h2>
-  <form method="post">
-    {% csrf_token %}
-    {{ form.non_field_errors }}
-
-    <div>
-      {{ form.username.label_tag }}
-      {{ form.username }}
-      {{ form.username.errors }}
-    </div>
-
-    <div>
-      {{ form.password1.label_tag }}
-      {{ form.password1 }}
-      {{ form.password1.errors }}
-    </div>
-
-    <div>
-      {{ form.password2.label_tag }}
-      {{ form.password2 }}
-      {{ form.password2.errors }}
-    </div>
-
-    <div>
-      {{ form.user_type.label_tag }}  <!-- New user type field -->
-      {{ form.user_type }}  <!-- Dropdown for user type (farmer/customer) -->
-      {{ form.user_type.errors }}
-    </div>
-
-    <button type="submit">Sign Up</button>
-  </form>
-{% endblock %}
+  {% block content %}
+  <div class="form-container">
+      <h2>Register</h2>
+      <form method="post">
+          {% csrf_token %}
+          {{ form.non_field_errors }}
+  
+          <div>
+              {{ form.user_type.label_tag }}  <!-- User type field -->
+              {{ form.user_type }}  
+              {{ form.user_type.errors }}
+          </div>
+  
+          <div>
+              {{ form.username.label_tag }}
+              {{ form.username }}
+              {{ form.username.errors }}
+          </div>
+  
+          <div>
+              {{ form.password1.label_tag }}
+              {{ form.password1 }}
+              {{ form.password1.errors }}
+          </div>
+  
+          <div>
+              {{ form.password2.label_tag }}
+              {{ form.password2 }}
+              {{ form.password2.errors }}
+          </div>
+  
+          <button type="submit">Sign Up</button>
+      </form>
+  </div>
+  
 </body>
 </html>
+{% endblock %}

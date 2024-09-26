@@ -1,0 +1,61 @@
+/* Dashboard container styling */
+.dashboard-container {
+  background-color: #fff8e1; /* A light yellow or cream background */
+  padding: 2em;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  max-width: 800px;
+  margin: auto;
+  text-align: center;
+}
+
+/* Greeting message styling */
+.greeting-message {
+  color: #6b614b; /* A warm earthy tone */
+  font-size: 1.5em;
+  margin-bottom: 1.5em;
+}
+
+/* Dashboard stats boxes */
+.dashboard-stats {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 2em;
+}
+
+.stat-box {
+  background-color: #ffeb99; /* Light yellow box */
+  padding: 1.5em;
+  border-radius: 8px;
+  width: 30%;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.stat-box h2 {
+  color: #3c763d; /* Fresh green color */
+  font-size: 1.2em;
+}
+
+.stat-box p {
+  font-size: 2em;
+  color: #6b614b; /* Keep the earthy tones */
+}
+
+/* Dashboard button styling */
+.dashboard-links {
+  display: flex;
+  justify-content: space-around;
+}
+
+.dashboard-btn {
+  background-color: #66bb6a; /* Green for action buttons */
+  color: white;
+  padding: 0.75em 2em;
+  text-decoration: none;
+  border-radius: 5px;
+  font-size: 1.1em;
+}
+
+.dashboard-btn:hover {
+  background-color: #558b2f; /* Darker green on hover */
+}
