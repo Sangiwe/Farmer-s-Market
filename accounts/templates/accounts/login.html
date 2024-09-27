@@ -1,16 +1,5 @@
-<!-- login.html -->
 {% extends 'base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <link rel="stylesheet" href="{% static '\css\forms.css' %}">
-    <title>Login</title>
-</head>
-<body>
 
 {% block content %}
 <div class="form-container">
@@ -33,7 +22,8 @@
     <p><a href="{% url 'password_reset' %}">Forgot your password?</a></p>
     <p>Don't have an account? <a href="{% url 'register' %}">Sign up here</a></p>
 </div>
+{% endblock %}
 
-</body>
-</html>
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/forms.css' %}">
 {% endblock %}
