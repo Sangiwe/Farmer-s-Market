@@ -1,45 +1,57 @@
-{% extends 'base.html '%}
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Farmer Dashboard{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/dashboard_overview.css' %}">
+{% endblock %}
 
 {% block content %}
-<h1>Welcome to your Dashboard, {{ user.username }}!</h1>
-<p>Total Products: {{ products_count }}</p>
-<p>Total Orders: {{ orders_count }}</p>
-<ul>
-  <li><a href="{% url 'manage_products' %}">Manage Products</a></li>
-  <li><a href="{% url  'view_orders' %}">View Orders</a></li>
-  <li><a href="{% url 'analytics' %}">View Analytics</a></li>
-  <li><a href="{% url 'account_settings' %}">Account Settings</a></li>
-</ul>
+<div class="dashboard-container">
+  <h1>Welcome to your Dashboard, {{ user.username }}!</h1>
+  <div class="dashboard-stats">
+    <p>Total Products: {{ products_count }}</p>
+    <p>Total Orders: {{ orders_count }}</p>
+  </div>
 
-<h3>Orders</h3>
-<table>
-    <thead>
+  <ul class="dashboard-links">
+    <li><a href="{% url 'manage_products' %}">Manage Products</a></li>
+    <li><a href="{% url 'view_orders' %}">View Orders</a></li>
+    <li><a href="{% url 'analytics' %}">View Analytics</a></li>
+    <li><a href="{% url 'account_settings' %}">Account Settings</a></li>
+  </ul>
+
+  <h3>Orders</h3>
+  <div class="table-container">
+    <table>
+      <thead>
         <tr>
-            <th>Order ID</th>
-            <th>Customer</th>
-            <th>Total Amount</th>
-            <th>Status</th>
-            <th>Actions</th>
+          <th>Order ID</th>
+          <th>Customer</th>
+          <th>Total Amount</th>
+          <th>Status</th>
+          <th>Actions</th>
         </tr>
-    </thead>
-    <tbody>
+      </thead>
+      <tbody>
         {% for order in orders %}
         <tr>
-            <td>{{ order.id }}</td>
-            <td>{{ order.customer.username }}</td>
-            <td>R{{ order.total_amount }}</td>
-            <td>{{ order.status }}</td>
-            <td>
-                {% if order.status == 'Pending' %}
-                <form action="{% url 'mark_order_completed' order.id %}" method="post">
-                    {% csrf_token %}
-                    <button type="submit">Mark as Completed</button>
-                </form>
-                {% endif %}
-            </td>
+          <td>{{ order.id }}</td>
+          <td>{{ order.customer.username }}</td>
+          <td>R{{ order.total_amount }}</td>
+          <td>{{ order.status }}</td>
+          <td>
+            {% if order.status == 'Pending' %}
+            <form action="{% url 'mark_order_completed' order.id %}" method="post">
+              {% csrf_token %}
+              <button type="submit">Mark as Completed</button>
+            </form>
+            {% endif %}
+          </td>
         </tr>
         {% endfor %}
-    </tbody>
-</table>
-
+      </tbody>
+    </table>
+  </div>
+</div>
 {% endblock %}

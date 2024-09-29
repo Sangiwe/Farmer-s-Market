@@ -26,9 +26,9 @@ class CustomUserRegistrationForm(UserCreationForm):
 class CustomUserChangeForm(forms.ModelForm):
     class Meta:
         model = User
-        fields = ['username', 'first_name', 'last_name', 'email']  # Only include relevant fields
+        fields = ['username', 'first_name', 'last_name', 'email']  
 
-    # Optionally, you can customize field widgets to make the form cleaner
+   
     widgets = {
         'username': forms.TextInput(attrs={'class': 'form-control'}),
         'first_name': forms.TextInput(attrs={'class': 'form-control'}),

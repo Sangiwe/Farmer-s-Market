@@ -1,61 +1,71 @@
-/* Dashboard container styling */
+/* Dashboard Container */
 .dashboard-container {
-  background-color: #fff8e1; /* A light yellow or cream background */
-  padding: 2em;
+  width: 80%;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Welcome Box */
+.welcome-box {
+  background-color: #f0f9f0;
+  padding: 20px;
+  border: 1px solid #4CAF50;
   border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  max-width: 800px;
-  margin: auto;
+  margin-bottom: 20px;
   text-align: center;
 }
 
-/* Greeting message styling */
-.greeting-message {
-  color: #6b614b; /* A warm earthy tone */
-  font-size: 1.5em;
-  margin-bottom: 1.5em;
+.welcome-box h1 {
+  margin-bottom: 10px;
+  color: #4CAF50;
 }
 
-/* Dashboard stats boxes */
-.dashboard-stats {
-  display: flex;
-  justify-content: space-around;
-  margin-bottom: 2em;
+/* Quick Links Box */
+.quick-links-box {
+  background-color: #fff;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  margin-bottom: 20px;
 }
 
-.stat-box {
-  background-color: #ffeb99; /* Light yellow box */
-  padding: 1.5em;
-  border-radius: 8px;
-  width: 30%;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+.quick-links-box h2 {
+  margin-bottom: 15px;
 }
 
-.stat-box h2 {
-  color: #3c763d; /* Fresh green color */
-  font-size: 1.2em;
+.quick-links-box ul {
+  list-style-type: none;
+  padding: 0;
 }
 
-.stat-box p {
-  font-size: 2em;
-  color: #6b614b; /* Keep the earthy tones */
+.quick-links-box ul li {
+  margin-bottom: 10px;
 }
 
-/* Dashboard button styling */
-.dashboard-links {
-  display: flex;
-  justify-content: space-around;
-}
-
-.dashboard-btn {
-  background-color: #66bb6a; /* Green for action buttons */
-  color: white;
-  padding: 0.75em 2em;
+.quick-links-box ul li a {
   text-decoration: none;
-  border-radius: 5px;
-  font-size: 1.1em;
+  color: #4CAF50;
+  font-weight: bold;
+  transition: color 0.3s ease;
 }
 
-.dashboard-btn:hover {
-  background-color: #558b2f; /* Darker green on hover */
+.quick-links-box ul li a:hover {
+  color: #388e3c;
+}
+
+/* Recent Activities */
+.recent-activities {
+  background-color: #f9f9f9;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+}
+
+.recent-activities h2 {
+  margin-bottom: 15px;
+  color: #555;
+}
+
+.recent-activities p {
+  color: #777;
 }

@@ -1,11 +1,26 @@
-<!-- add_product.html -->
 {% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Add Product{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/add_products.css' %}">
+{% endblock %}
 
 {% block content %}
-<h1>Add New Product</h1>
-<form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Save</button>
-</form>
+<div class="add-product-container">
+    <h1>Add New Product</h1>
+    
+    <form method="post" enctype="multipart/form-data" class="add-product-form">
+        {% csrf_token %}
+        
+        <!-- Display form fields -->
+        {{ form.as_p }}
+
+        <div class="form-actions">
+            <button type="submit">Save</button>
+            <a href="{% url 'manage_products' %}" class="cancel-button">Cancel</a>
+        </div>
+    </form>
+</div>
 {% endblock %}

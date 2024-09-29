@@ -1,11 +1,32 @@
-<!-- edit_product.html -->
 {% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Edit Product{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/edit_products.css' %}">
+{% endblock %}
 
 {% block content %}
-<h1>Edit Product</h1>
-<form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Save</button>
-</form>
+<div class="edit-product-container">
+    <h1>Edit Product: {{ product.name }}</h1>
+    
+    <form method="post" enctype="multipart/form-data" class="edit-product-form">
+        {% csrf_token %}
+        
+        {{ form.as_p }}
+        
+        {% if product.image %}
+        <div class="product-image-preview">
+            <h3>Current Image</h3>
+            <img src="{{ product.image.url }}" alt="{{ product.name }}" style="width:150px;height:auto;">
+        </div>
+        {% endif %}
+        
+        <div class="form-actions">
+            <button type="submit">Save Changes</button>
+            <a href="{% url 'manage_products' %}" class="cancel-button">Cancel</a>
+        </div>
+    </form>
+</div>
 {% endblock %}

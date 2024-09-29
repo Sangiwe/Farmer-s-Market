@@ -1,0 +1,61 @@
+/* Container for the orders section */
+.orders-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Title styling */
+h1 {
+  text-align: center;
+  font-size: 2em;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+/* Orders list */
+.order-list {
+  list-style: none;
+  padding: 0;
+}
+
+.order-item {
+  border-bottom: 1px solid #ddd;
+  padding: 15px 0;
+  margin-bottom: 15px;
+}
+
+/* Order Information styling */
+.order-info p {
+  font-size: 1em;
+  margin: 5px 0;
+}
+
+/* Button styling */
+.btn-success {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1em;
+  cursor: pointer;
+}
+
+.btn-success:hover {
+  background-color: #45a049;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .orders-container {
+      padding: 15px;
+  }
+
+  .btn-success {
+      width: 100%;
+  }
+}

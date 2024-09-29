@@ -1,7 +1,16 @@
 {% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Order Confirmation{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/order_confirmation.css' %}">
+{% endblock %}
 
 {% block content %}
-<h1>Order Confirmation</h1>
-<p>Your order has been placed successfully. You will pay upon pickup.</p>
-<a href="{% url 'product_list' %}"><button>Continue Shopping</button></a>
+  <div class="confirmation-container">
+    <h1>Order Confirmation</h1>
+    <p>Your order has been placed successfully. You will pay upon pickup.</p>
+    <a href="{% url 'product_list' %}" class="continue-shopping-button">Continue Shopping</a>
+  </div>
 {% endblock %}

@@ -43,14 +43,14 @@ def product_detail(request, pk):
     return render(request, 'marketplace/product_detail.html', {
         'product': product,
         'cart_item': cart_item,
-        'quantity_range': range(1, 11),  # Adjust range if needed
+        'quantity_range': range(1, 11), 
         'recommended_products': recommended_products
     })
 
 @login_required
 def add_to_cart(request, pk):
     product = get_object_or_404(Product, pk=pk)
-    quantity = int(request.POST.get('quantity', 1))  # Get the quantity from the form, default to 1 if not provided
+    quantity = int(request.POST.get('quantity', 1)) 
     cart, created = Cart.objects.get_or_create(user=request.user)
     cart_item, created = CartItem.objects.get_or_create(cart=cart, product=product)
     
@@ -99,7 +99,6 @@ def cart_contents(request):
 @login_required
 def checkout(request):
     if request.method == 'POST':
-        # Implement checkout logic here (e.g., processing payment, saving order, etc.)
         
         # On success, redirect to thank you page
         return redirect('thank_you')

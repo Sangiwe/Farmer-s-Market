@@ -1,15 +1,26 @@
-<!-- account_settings.html -->
 {% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Account Settings{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/account_settings.css' %}">
+{% endblock %}
 
 {% block content %}
-<h1>Account Settings</h1>
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Save Changes</button>
-</form>
+<div class="form-container">
+    <h2>Account Settings</h2>
 
-<p>
-    <a href="{% url 'change_password' %}">Change Password</a>
-</p>
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-fields">
+            {{ form.as_p }}
+        </div>
+        <button type="submit" class="btn">Save Changes</button>
+    </form>
+
+    <p>
+        <a href="{% url 'change_password' %}">Change Password</a>
+    </p>
+</div>
 {% endblock %}

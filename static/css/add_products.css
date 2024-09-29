@@ -1,0 +1,96 @@
+/* Container for the add product page */
+.add-product-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Title styling */
+h1 {
+  text-align: center;
+  font-size: 2em;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+/* Add product form */
+.add-product-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* Form field styling */
+.add-product-form input,
+.add-product-form select,
+.add-product-form textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 1em;
+}
+
+/* Responsive form fields */
+.add-product-form input[type="file"] {
+  padding: 3px;
+}
+
+.add-product-form textarea {
+  resize: vertical;
+}
+
+/* Submit and cancel buttons */
+.form-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+}
+
+button[type="submit"] {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1.1em;
+}
+
+button[type="submit"]:hover {
+  background-color: #45a049;
+}
+
+.cancel-button {
+  text-decoration: none;
+  background-color: #e74c3c;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 1.1em;
+}
+
+.cancel-button:hover {
+  background-color: #c0392b;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .add-product-container {
+      padding: 15px;
+  }
+
+  .form-actions {
+      flex-direction: column;
+      gap: 10px;
+  }
+
+  button[type="submit"],
+  .cancel-button {
+      width: 100%;
+  }
+}

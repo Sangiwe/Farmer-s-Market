@@ -1,52 +1,59 @@
 {% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Product List{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/product_list.css' %}">
+{% endblock %}
 
 {% block content %}
-   <h1>Product List</h1>
+   <h1 class="heading">Product List</h1>
+
+   <form method="get" action="{% url 'product_list' %}" class="filter-form">
+        <!-- Search Field -->
+        <input type="text" name="search" placeholder="Search products" value="{{ request.GET.search }}">
+
+        <!-- Category Filter -->
+        <select name="category">
+            <option value="">All Categories</option>
+            {% for category in categories %}
+                <option value="{{ category.id }}" {% if request.GET.category == category.id|stringformat:"s" %}selected{% endif %}>
+                    {{ category.name }}
+                </option>
+            {% endfor %}
+        </select>
+
+        <!-- Price Range Filter -->
+        <select name="price_range">
+            <option value="0-10" {% if request.GET.price_range == '0-10' %}selected{% endif %}>R0 - R10</option>
+            <option value="11-20" {% if request.GET.price_range == '11-20' %}selected{% endif %}>R11 - R20</option>
+            <option value="21-50" {% if request.GET.price_range == '21-50' %}selected{% endif %}>R21 - R50</option>
+            <option value="51-100" {% if request.GET.price_range == '51-100' %}selected{% endif %}>R51 - R100</option>
+            <option value="101-200" {% if request.GET.price_range == '101-200' %}selected{% endif %}>R101 - R200</option>
+        </select>
+        
+        <button type="submit" class="filter-button">Apply Filters</button>
+   </form>
+
    {% if products %}
-
-   <form method="get" action="{% url 'product_list' %}">
-    <!-- Search Field -->
-    <input type="text" name="search" placeholder="Search products" value="{{ request.GET.search }}">
-    
-    <!-- Category Filter -->
-    <select name="category">
-        <option value="">All Categories</option>
-        {% for category in categories %}
-            <option value="{{ category.id }}" {% if request.GET.category == category.id|stringformat:"s" %}selected{% endif %}>
-                {{ category.name }}
-            </option>
-        {% endfor %}
-    </select>
-
-    
-    <!-- Price Range Filter -->
-    <select name="price_range">
-        <option value="0-10" {% if request.GET.price_range == '0-10' %}selected{% endif %}>R0 - R10</option>
-        <option value="11-20" {% if request.GET.price_range == '11-20' %}selected{% endif %}>R11 - R20</option>
-        <option value="21-50" {% if request.GET.price_range == '21-50' %}selected{% endif %}>R21 - R50</option>
-        <option value="51-100" {% if request.GET.price_range == '51-100' %}selected{% endif %}>R51 - R100</option>
-        <option value="101-200" {% if request.GET.price_range == '101-200' %}selected{% endif %}>R101 - R200</option>
-    </select>
-    
-    <button type="submit">Apply Filters</button>
-</form>
-
-
-   <ul>
+   <ul class="product-list">
        {% for product in products %}
-           <li>
-            <a href="{% url 'product_detail' product.pk %}">
-                {% if product.image %}
-                <img src="{{ product.image.url }}" alt="{{ product.name }}" style="width:100px;height:100px;">
-            {% else %}
-                <img src="{{ MEDIA_URL }}product_images/placeholder.jpg" alt="No image available" style="width:100px;height:100px;">
-            {% endif %}
-                {{ product.name }}</a>
-             ({{ product.price }})
+           <li class="product-item">
+                <a href="{% url 'product_detail' product.pk %}" class="product-link">
+                    {% if product.image %}
+                        <img src="{{ product.image.url }}" alt="{{ product.name }}" class="product-image">
+                    {% else %}
+                        <img src="{{ MEDIA_URL }}product_images/placeholder.jpg" alt="No image available" class="product-image">
+                    {% endif %}
+                    <p>{{ product.name }}</p>
+                    <p>Price: R{{ product.price }}</p>
+                </a>
            </li>
        {% endfor %}
    </ul>
-{% else %}
-   <p>No products available.</p>
+   {% else %}
+   <p class="no-products">No products available.</p>
    {% endif %}
+
 {% endblock %}

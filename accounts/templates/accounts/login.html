@@ -1,12 +1,18 @@
 {% extends 'base.html' %}
 {% load static %}
 
+{% block title %}Login{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/forms.css' %}">
+{% endblock %}
+
 {% block content %}
 <div class="form-container">
-    <h1>Login</h1>
+    <h2>Login</h2>
     <form method="post">
         {% csrf_token %}
-        
+
         <div>
             <label for="user_type">Login as:</label>
             <select name="user_type" id="user_type">
@@ -16,14 +22,14 @@
         </div>
 
         {{ form.as_p }}
-        <button type="submit">Login</button>
+
+        <button type="submit" class="btn">Login</button>
     </form>
-    
+
     <p><a href="{% url 'password_reset' %}">Forgot your password?</a></p>
     <p>Don't have an account? <a href="{% url 'register' %}">Sign up here</a></p>
 </div>
 {% endblock %}
 
-{% block extra_css %}
-<link rel="stylesheet" href="{% static 'css/forms.css' %}">
-{% endblock %}
+
+

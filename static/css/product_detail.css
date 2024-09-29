@@ -1,0 +1,128 @@
+/* Container */
+.product-detail-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  text-align: center;
+}
+
+.product-box {
+  border: 1px solid #ddd;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Product Name */
+.product-name {
+  font-size: 1.8em;
+  margin-bottom: 15px;
+}
+
+/* Product Image */
+.product-image-container {
+  margin-bottom: 15px;
+}
+
+.product-image {
+  max-width: 250px;
+  height: auto;
+  border-radius: 5px;
+}
+
+/* Product Info */
+.product-info {
+  margin-bottom: 15px;
+}
+
+.product-description {
+  font-size: 1.1em;
+  margin-bottom: 8px;
+}
+
+.product-price {
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+/* Add to Cart Form */
+.add-to-cart-form {
+  margin-bottom: 15px;
+}
+
+.add-to-cart-button {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  cursor: pointer;
+}
+
+/* Cart Message */
+.cart-message {
+  margin: 15px 0;
+  font-size: 0.9em;
+  color: green;
+}
+
+/* Action Buttons */
+.action-buttons a {
+  margin: 10px;
+  text-decoration: none;
+}
+
+.view-cart-button, .continue-shopping-button {
+  background-color: #007BFF;
+  color: white;
+  padding: 8px 15px;
+  border-radius: 5px;
+  text-decoration: none;
+}
+
+/* Recommended Products */
+.recommendation-title {
+  margin-top: 30px;
+  font-size: 1.5em;
+  text-align: center;
+}
+
+.recommended-products {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  list-style: none;
+  padding: 0;
+}
+
+.recommended-item {
+  width: 150px;
+  margin: 10px;
+  text-align: center;
+}
+
+.recommended-image {
+  width: 100px;
+  height: 100px;
+  border-radius: 5px;
+}
+
+/* Mobile Responsiveness */
+@media only screen and (max-width: 768px) {
+  .product-detail-container, .recommended-products {
+      max-width: 100%;
+      padding: 10px;
+  }
+
+  .product-box {
+      padding: 15px;
+  }
+
+  .product-image {
+      max-width: 100%;
+  }
+
+  .recommended-item {
+      width: 100%;
+  }
+}

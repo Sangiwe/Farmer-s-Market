@@ -26,7 +26,7 @@ class Profile(models.Model):
     
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     user_type = models.CharField(max_length=10, choices=USER_TYPE_CHOICES, default='customer')
-    # You can add more fields related to the user profile, such as address, phone, etc.
+
 
     def __str__(self):
         return self.user.username

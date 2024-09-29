@@ -1,25 +1,40 @@
-<!-- manage_products.html -->
 {% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Manage Products{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/manage_products.css' %}">
+{% endblock %}
 
 {% block content %}
-<h1>Manage Your Products</h1>
-<a href="{% url 'add_product' %}">Add New Product</a>
-{% for product in products %}
-    <div class="product">
-        <h3>{{ product.name }}</h3>
-        <p>Price: {{ product.price }}</p>
-        <p>Description: {{ product.description }}</p>
-        
-        <!-- Display the product image -->
-        {% if product.image %}
-            <img src="{{ product.image.url }}" alt="{{ product.name }}" style="width:150px;height:auto;">
-        {% else %}
-            <p>No image available.</p>
-        {% endif %}
-        
-        <a href="{% url 'edit_product' product.id %}">Edit</a>
-        <a href="{% url 'delete_product' product.id %}">Delete</a>
+<div class="manage-products-container">
+    <h1>Manage Your Products</h1>
+    <div class="add-product-button">
+        <a href="{% url 'add_product' %}">Add New Product</a>
     </div>
-{% endfor %}
 
+    <div class="products-grid">
+        {% for product in products %}
+        <div class="product-card">
+            <h3>{{ product.name }}</h3>
+            <p><strong>Price:</strong> R{{ product.price|floatformat:2 }}</p>
+            <p><strong>Description:</strong> {{ product.description }}</p>
+            
+            <div class="product-image">
+                {% if product.image %}
+                    <img src="{{ product.image.url }}" alt="{{ product.name }}">
+                {% else %}
+                    <p>No image available.</p>
+                {% endif %}
+            </div>
+            
+            <div class="product-actions">
+                <a href="{% url 'edit_product' product.id %}">Edit</a>
+                <a href="{% url 'delete_product' product.id %}">Delete</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
 {% endblock %}

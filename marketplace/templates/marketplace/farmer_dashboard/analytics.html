@@ -1,87 +1,84 @@
 {% extends 'base.html' %}
 
+{% load static %}
+
+{% block title %}Analytics Overview{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/analytics.css' %}">
+{% endblock %}
+
 {% block content %}
-<h1>Analytics Overview</h1>
+<div class="analytics-container">
+    <h1>Analytics Overview</h1>
 
-<h3>Total Sales: R{{ total_sales }}</h3>
-<h3>Total Orders: {{ total_orders }}</h3>
-<h3>Average Order Value: R{{ avg_order_value }}</h3>
+    <h3>Total Sales: R{{ total_sales }}</h3>
+    <h3>Total Orders: {{ total_orders }}</h3>
+    <h3>Average Order Value: R{{ avg_order_value }}</h3>
 
-<h3>Best-Selling Products</h3>
-<ul>
-    {% for product in best_selling_products %}
-        <li>
-            {{ product.name }} - {{ product.total_sold }} units sold
-        </li>
-    {% endfor %}
-</ul>
+    <h3>Best-Selling Products</h3>
+    <ul class="best-selling-products">
+        {% for product in best_selling_products %}
+            <li>
+                {{ product.name }} - {{ product.total_sold }} units sold
+            </li>
+        {% endfor %}
+    </ul>
 
-<h3>Sales by Product</h3>
-<table>
-    <thead>
-        <tr>
-            <th>Product</th>
-            <th>Units Sold</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for product in product_sales %}
+    <h3>Sales by Product</h3>
+    <table class="sales-table">
+        <thead>
             <tr>
-                <td>{{ product.name }}</td>
-                <td>{{ product.total_sold|default:"0" }}</td>
+                <th>Product</th>
+                <th>Units Sold</th>
             </tr>
-        {% endfor %}
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            {% for product in product_sales %}
+                <tr>
+                    <td>{{ product.name }}</td>
+                    <td>{{ product.total_sold|default:"0" }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 
-<h3>Sales by Product Chart</h3>
-<canvas id="salesChart"></canvas>
+    <h3>Sales by Product Chart</h3>
+    <canvas id="salesChart" class="sales-chart"></canvas>
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    // Data for the chart
-    const ctx = document.getElementById('salesChart').getContext('2d');
-    
-    // Extract data from Django template
-    const labels = [
-        {% for product in product_sales %}
-            "{{ product.name }}"{% if not forloop.last %}, {% endif %}
-        {% endfor %}
-    ];
-    
-    const data = [
-        {% for product in product_sales %}
-            {{ product.total_sold|default:"0" }}{% if not forloop.last %}, {% endif %}
-        {% endfor %}
-    ];
-    
-    // Chart configuration
-    new Chart(ctx, {
-        type: 'bar', // or 'line' depending on your preference
-        data: {
-            labels: labels,
-            datasets: [{
-                label: 'Units Sold',
-                data: data,
-                backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                borderColor: 'rgba(75, 192, 192, 1)',
-                borderWidth: 1
-            }]
-        },
-        options: {
-            responsive: true,
-            scales: {
-                x: {
-                    beginAtZero: true
-                },
-                y: {
-                    beginAtZero: true
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const ctx = document.getElementById('salesChart').getContext('2d');
+
+        const labels = JSON.parse('{{ chart_labels|safe }}');
+        const data = JSON.parse('{{ chart_data|safe }}');
+
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Units Sold',
+                    data: data,
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    x: {
+                        beginAtZero: true
+                    },
+                    y: {
+                        beginAtZero: true
+                    }
                 }
             }
-        }
+        });
     });
-});
-</script>
-
+    </script>
+</div>
 {% endblock %}

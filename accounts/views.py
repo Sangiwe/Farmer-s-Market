@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth import login, logout
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.forms import UserCreationForm
-from .forms import CustomUserRegistrationForm  # Import custom form
+from .forms import CustomUserRegistrationForm  
 from django.contrib.auth.models import Group  # For assigning farmer/customer group
 from .forms import CustomUserChangeForm
 
@@ -40,7 +40,7 @@ def logout_view(request):
 
 # Registration View
 from django.contrib.auth.models import Group
-from .models import Profile  # Import Profile model
+from .models import Profile  
 
 from django.db import IntegrityError
 
@@ -64,7 +64,7 @@ def register_view(request):
                     return redirect('dashboard')  # Redirect to customer dashboard
             except IntegrityError as e:
                 print(f'IntegrityError: {e}')
-                # Optionally, you can add a message for the user here
+                
         else:
             # Handle form errors
             print(form.errors)
@@ -82,7 +82,7 @@ def edit_profile_view(request):
         form = CustomUserChangeForm(request.POST, instance=user)
         if form.is_valid():
             form.save()
-            return redirect('dashboard')  # Redirect to a common dashboard or specific dashboard
+            return redirect('dashboard')  
     else:
         form = CustomUserChangeForm(instance=user)
     

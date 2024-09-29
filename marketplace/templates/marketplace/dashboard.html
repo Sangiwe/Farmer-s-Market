@@ -1,11 +1,36 @@
 {% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Customer Dashboard{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+{% endblock %}
 
 {% block content %}
-<h1>Dashboard</h1>
-<p>Welcome to your dashboard, {{ user.username }}!</p>
-<p>Here are some quick links:</p>
-<ul>
-    <li><a href="{% url 'product_list' %}">View Products</a></li>
-    <li><a href="{% url 'logout' %}">Logout</a></li>
-</ul>
+<div class="dashboard-container">
+    <!-- Welcome Box -->
+    <div class="welcome-box">
+        <h1>Welcome, {{ user.username }}!</h1>
+        <p>We’re glad to have you back. Here are some quick actions to get you started:</p>
+    </div>
+
+    <!-- Quick Links Box -->
+    <div class="quick-links-box">
+        <h2>Quick Links</h2>
+        <ul>
+            <li><a href="{% url 'product_list' %}">View Products</a></li>
+            <li><a href="{% url 'logout' %}">Logout</a></li>
+        </ul>
+    </div>
+
+    <!-- Placeholder for Recent Activities (optional) -->
+    <div class="recent-activities">
+        <h2>Recent Activities</h2>
+        <p>You haven’t viewed any products recently.</p>
+    </div>
+</div>
 {% endblock %}
+
+
+

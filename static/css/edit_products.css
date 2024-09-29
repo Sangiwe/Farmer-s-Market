@@ -1,0 +1,102 @@
+/* Container for the edit product page */
+.edit-product-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Title styling */
+h1 {
+  text-align: center;
+  font-size: 2em;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+/* Form styling */
+.edit-product-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.edit-product-form input,
+.edit-product-form select,
+.edit-product-form textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 1em;
+}
+
+.edit-product-form input[type="file"] {
+  padding: 3px;
+}
+
+/* Product Image Preview Section */
+.product-image-preview {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.product-image-preview img {
+  border-radius: 5px;
+  max-width: 100%;
+  height: auto;
+}
+
+/* Actions (Save/Cancel) */
+.form-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+}
+
+button[type="submit"] {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1.1em;
+}
+
+button[type="submit"]:hover {
+  background-color: #45a049;
+}
+
+.cancel-button {
+  text-decoration: none;
+  background-color: #e74c3c;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 1.1em;
+}
+
+.cancel-button:hover {
+  background-color: #c0392b;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .edit-product-container {
+      padding: 15px;
+  }
+
+  .form-actions {
+      flex-direction: column;
+      gap: 10px;
+  }
+
+  button[type="submit"],
+  .cancel-button {
+      width: 100%;
+  }
+}

@@ -1,28 +1,44 @@
 {% extends 'base.html' %}
+{% load static %}
+
+{% block title %}View Orders{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/view_orders.css' %}">
+{% endblock %}
 
 {% block content %}
-<h1>Your Orders</h1>
-<ul>
-    {% for order in orders %}
-        <li>
-            Customer: {{ order.customer.username }}<br>
-            Order ID: {{ order.id }}<br>
-            Total Amount: {{ order.total_amount }}<br>
-            Quantity: {% for item in order.orderitem_set.all %}{{ item.quantity }}{% endfor %}<br>
-            Status: {{ order.status }}<br>
-            <!-- Option to update status if needed -->
-            
+<div class="orders-container">
+    <h1>Your Orders</h1>
+    
+    {% if orders %}
+    <ul class="order-list">
+        {% for order in orders %}
+        <li class="order-item">
+            <div class="order-info">
+                <p><strong>Customer:</strong> {{ order.customer.username }}</p>
+                <p><strong>Order ID:</strong> {{ order.id }}</p>
+                <p><strong>Total Amount:</strong> R{{ order.total_amount }}</p>
+                <p><strong>Quantity:</strong> 
+                    {% for item in order.orderitem_set.all %}
+                        {{ item.quantity }}
+                    {% endfor %}
+                </p>
+                <p><strong>Status:</strong> {{ order.status }}</p>
+            </div>
+
             <!-- Form to mark order as completed -->
-            <form action="{% url 'mark_order_completed' order.id %}" method="POST">
+            {% if order.status == 'Pending' %}
+            <form action="{% url 'mark_order_completed' order.id %}" method="POST" class="order-action-form">
                 {% csrf_token %}
                 <button type="submit" class="btn btn-success">Mark as Completed</button>
             </form>
+            {% endif %}
         </li>
-    {% endfor %}
-</ul>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p>No orders found.</p>
+    {% endif %}
+</div>
 {% endblock %}
-
-
-
-
-

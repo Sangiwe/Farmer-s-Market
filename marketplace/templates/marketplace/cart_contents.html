@@ -1,50 +1,58 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cart</title>
-</head>
-<body>
-  
-  <h1>Cart Contents</h1>
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Cart{% endblock %}
 
-  {% if cart_items %}
-      <ul>
-          {% for item in cart_items %}
-              <li>
-                {% if item.product.image %}
-                <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}" style="width:50px;height:50px;">
-            {% else %}
-                <img src="/path/to/placeholder/image.jpg" alt="No image available" style="width:50px;height:50px;">
-            {% endif %}
-                  {{ item.product.name }} x {{ item.quantity }} - 
-                  R{{ item.product.price|floatformat:2 }} each
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/cart_content.css' %}">
+{% endblock %}
 
-                  <form action="{% url 'remove_from_cart' item.product.id %}" method="post" style="display:inline;">
-                    {% csrf_token %}
-                    <button type="submit">Remove from Cart</button>
-                </form>
+{% block content %}
+  <div class="cart-container">
+    <h1>Cart Contents</h1>
 
-              </li>
-          {% endfor %}
+    {% if cart_items %}
+      <ul class="cart-items-list">
+        {% for item in cart_items %}
+          <li class="cart-item">
+            <div class="cart-item-image">
+              {% if item.product.image %}
+                <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}">
+              {% else %}
+                <img src="/path/to/placeholder/image.jpg" alt="No image available">
+              {% endif %}
+            </div>
+
+            <div class="cart-item-details">
+              <p class="product-name">{{ item.product.name }} x {{ item.quantity }}</p>
+              <p class="product-price">R{{ item.product.price|floatformat:2 }} each</p>
+            </div>
+
+            <div class="cart-item-actions">
+              <form action="{% url 'remove_from_cart' item.product.id %}" method="post">
+                {% csrf_token %}
+                <button type="submit" class="remove-button">Remove</button>
+              </form>
+            </div>
+          </li>
+        {% endfor %}
       </ul>
 
-      <h2>Total: R{{ total_amount|floatformat:2 }}</h2>
-      <a href="{% url 'product_list' %}"><button>Continue Shopping</button></a>
+      <div class="cart-total">
+        <h2>Total: R{{ total_amount|floatformat:2 }}</h2>
+      </div>
 
+      <div class="cart-buttons">
+        <a href="{% url 'product_list' %}" class="continue-shopping-button">Continue Shopping</a>
 
-      <form action="{% url 'place_order' %}" method="post">
+        <form action="{% url 'place_order' %}" method="post">
           {% csrf_token %}
-          <button type="submit">Place Order</button>
-      </form>
+          <button type="submit" class="place-order-button">Place Order</button>
+        </form>
+      </div>
 
-  {% else %}
-      <p>Your cart is empty.</p>
-      <p>Would you like to continue shopping?</p>
-      <a href="{% url 'product_list' %}"><button>Continue Shopping</button></a>
-  {% endif %}
-  
-  
-</body>
-</html>
+    {% else %}
+      <p class="empty-cart-message">Your cart is empty.</p>
+      <a href="{% url 'product_list' %}" class="continue-shopping-button">Continue Shopping</a>
+    {% endif %}
+  </div>
+{% endblock %}

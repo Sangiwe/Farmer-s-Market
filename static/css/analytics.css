@@ -1,0 +1,59 @@
+/* Container for the analytics section */
+.analytics-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Title styling */
+h1 {
+  text-align: center;
+  font-size: 2em;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+/* Best-selling products list */
+.best-selling-products {
+  list-style: none;
+  padding: 0;
+}
+
+.best-selling-products li {
+  padding: 5px 0;
+}
+
+/* Table styling */
+.sales-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.sales-table th, .sales-table td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: left;
+}
+
+.sales-table th {
+  background-color: #4CAF50;
+  color: white;
+}
+
+/* Chart styling */
+.sales-chart {
+  width: 100%;
+  height: 400px; /* Adjust height as needed */
+  margin-top: 20px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .analytics-container {
+      padding: 15px;
+  }
+}

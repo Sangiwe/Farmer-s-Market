@@ -1,59 +1,75 @@
 {% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ product.detail }}{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/product_detail.css' %}">
+{% endblock %}
 
 {% block content %}
-   <h1>{{ product.name }}</h1>
-   {% if product.image %}
-   <img src="{{ product.image.url }}" alt="{{ product.name }}" style="width:300px;height:300px;">
-{% else %}
-   <img src="/path/to/placeholder/image.jpg" alt="No image available" style="width:300px;height:300px;">
-{% endif %}
-   <p>{{ product.description }}</p>
-   <p>Price: R{{ product.price }}</p>
+    <div class="product-detail-container">
+        <div class="product-box">
+            <h1 class="product-name">{{ product.name }}</h1>
 
-   <!-- Form to Add to Cart -->
-   <form action="{% url 'add_to_cart' product.id %}" method="post">
-       {% csrf_token %}
-       <label for="quantity">Quantity:</label>
-       <select name="quantity" id="quantity">
-           {% for i in quantity_range %}
-               <option value="{{ i }}" {% if cart_item and cart_item.quantity == i %}selected{% endif %}>{{ i }}</option>
-           {% endfor %}
-       </select>
-       <button type="submit">Add to Cart</button>
-   </form>
-
-   <!-- Remove from Cart Button -->
-   <!-- {% if cart_item %}
-       <form action="{% url 'remove_from_cart' product.id %}" method="post">
-           {% csrf_token %}
-           <button type="submit">Remove from Cart</button>
-       </form>
-   {% endif %} -->
-
-   <!-- Display a message for successful add/remove -->
-   {% if messages %}
-       {% for message in messages %}
-           <p>{{ message }}</p>
-       {% endfor %}
-   {% endif %}
-   <a href="{% url 'cart_contents' %}"><button>View Cart</button></a>
-   <a href="{% url 'product_list' %}"><button>Continue Shopping</button></a>
-
-   <h3>Recommended Products</h3>
-<ul>
-    {% for recommended_product in recommended_products %}
-        <li>
-            <a href="{% url 'product_detail' recommended_product.pk %}">{{ recommended_product.name }}</a> 
-            <a href="{% url 'product_detail' recommended_product.pk %}">
-                {% if recommended_product.image %}
-                    <img src="{{ recommended_product.image.url }}" alt="{{ recommended_product.name }}" style="width:100px;height:100px;">
+            <div class="product-image-container">
+                {% if product.image %}
+                    <img src="{{ product.image.url }}" alt="{{ product.name }}" class="product-image">
                 {% else %}
-                    <img src="/path/to/placeholder/image.jpg" alt="No image available" style="width:100px;height:100px;">
+                    <img src="/path/to/placeholder/image.jpg" alt="No image available" class="product-image">
                 {% endif %}
-            ({{ recommended_product.price }} ZAR)
-        </li>
-    {% empty %}
-        <li>No recommendations available.</li>
-    {% endfor %}
-</ul>
+            </div>
+
+            <div class="product-info">
+                <p class="product-description">{{ product.description }}</p>
+                <p class="product-price">Price: R{{ product.price }}</p>
+
+                <!-- Form to Add to Cart -->
+                <form action="{% url 'add_to_cart' product.id %}" method="post" class="add-to-cart-form">
+                    {% csrf_token %}
+                    <label for="quantity">Quantity:</label>
+                    <select name="quantity" id="quantity">
+                        {% for i in quantity_range %}
+                            <option value="{{ i }}" {% if cart_item and cart_item.quantity == i %}selected{% endif %}>{{ i }}</option>
+                        {% endfor %}
+                    </select>
+                    <button type="submit" class="add-to-cart-button">Add to Cart</button>
+                </form>
+
+                <!-- Cart Success Message -->
+                {% if messages %}
+                    <div class="cart-message">
+                        {% for message in messages %}
+                            <p>{{ message }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+
+                <div class="action-buttons">
+                    <a href="{% url 'cart_contents' %}" class="view-cart-button">View Cart</a>
+                    <a href="{% url 'product_list' %}" class="continue-shopping-button">Continue Shopping</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recommended Products -->
+        <h3 class="recommendation-title">Recommended Products</h3>
+        <ul class="recommended-products">
+            {% for recommended_product in recommended_products %}
+                <li class="recommended-item">
+                    <a href="{% url 'product_detail' recommended_product.pk %}" class="recommended-link">
+                        {% if recommended_product.image %}
+                            <img src="{{ recommended_product.image.url }}" alt="{{ recommended_product.name }}" class="recommended-image">
+                        {% else %}
+                            <img src="/path/to/placeholder/image.jpg" alt="No image available" class="recommended-image">
+                        {% endif %}
+                        <p>{{ recommended_product.name }}</p>
+                        <p>R{{ recommended_product.price }}</p>
+                    </a>
+                </li>
+            {% empty %}
+                <li>No recommendations available.</li>
+            {% endfor %}
+        </ul>
+    </div>
 {% endblock %}
